@@ -1,0 +1,182 @@
+
+<% layout("/layouts/boilerplate") %>
+
+<h2 class="mb-4">My Booking History</h2>
+
+<!-- Upcoming Bookings -->
+
+<h3 class="text-success">Upcoming Bookings</h3>
+
+<% if(upcomingBookings.length === 0){ %>
+
+<div class="alert alert-info">
+    No upcoming bookings.
+</div>
+
+<% } else { %>
+
+<div class="row">
+
+<% for(let booking of upcomingBookings){ %>
+
+<div class="card col-md-5 m-3 shadow-sm">
+
+<img
+src="<%= booking.listing.image.url %>"
+class="card-img-top"
+style="height:220px; object-fit:cover;"
+>
+
+<div class="card-body">
+
+<h4><%= booking.listing.title %></h4>
+
+<p>
+<b>Location:</b>
+<%= booking.listing.location %>,
+<%= booking.listing.country %>
+</p>
+
+<p><b>Check In:</b> <%= booking.checkIn.toDateString() %></p>
+
+<p><b>Check Out:</b> <%= booking.checkOut.toDateString() %></p>
+
+<p><b>Guests:</b> <%= booking.guests %></p>
+
+<p>
+<b>Total Price:</b>
+₹ <%= booking.totalPrice.toLocaleString("en-IN") %>
+</p>
+
+<p>
+
+<span class="badge bg-success">
+<%= booking.status %>
+</span>
+
+</p>
+
+<form
+action="/bookings/<%= booking._id %>/cancel"
+method="POST"
+>
+
+<button class="btn btn-danger">
+Cancel Booking
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<% } %>
+
+</div>
+
+<% } %>
+
+<hr>
+
+<!-- Completed Bookings -->
+
+<h3 class="text-primary">Completed Bookings</h3>
+
+<% if(completedBookings.length === 0){ %>
+
+<div class="alert alert-secondary">
+No completed bookings.
+</div>
+
+<% } else { %>
+
+<div class="row">
+
+<% for(let booking of completedBookings){ %>
+
+<div class="card col-md-5 m-3 shadow-sm">
+
+<img
+src="<%= booking.listing.image.url %>"
+class="card-img-top"
+style="height:220px; object-fit:cover;"
+>
+
+<div class="card-body">
+
+<h4><%= booking.listing.title %></h4>
+
+<p><b>Location:</b> <%= booking.listing.location %>, <%= booking.listing.country %></p>
+
+<p><b>Check In:</b> <%= booking.checkIn.toDateString() %></p>
+
+<p><b>Check Out:</b> <%= booking.checkOut.toDateString() %></p>
+
+<p><b>Total Price:</b> ₹ <%= booking.totalPrice.toLocaleString("en-IN") %></p>
+
+<span class="badge bg-primary">
+Completed
+</span>
+
+</div>
+
+</div>
+
+<% } %>
+
+</div>
+
+<% } %>
+
+<hr>
+
+<!-- Cancelled Bookings -->
+
+<h3 class="text-danger">Cancelled Bookings</h3>
+
+<% if(cancelledBookings.length === 0){ %>
+
+<div class="alert alert-warning">
+No cancelled bookings.
+</div>
+
+<% } else { %>
+
+<div class="row">
+
+<% for(let booking of cancelledBookings){ %>
+
+<div class="card col-md-5 m-3 shadow-sm">
+
+<img
+src="<%= booking.listing.image.url %>"
+class="card-img-top"
+style="height:220px; object-fit:cover;"
+>
+
+<div class="card-body">
+
+<h4><%= booking.listing.title %></h4>
+
+<p><b>Location:</b> <%= booking.listing.location %>, <%= booking.listing.country %></p>
+
+<p><b>Check In:</b> <%= booking.checkIn.toDateString() %></p>
+
+<p><b>Check Out:</b> <%= booking.checkOut.toDateString() %></p>
+
+<p><b>Total Price:</b> ₹ <%= booking.totalPrice.toLocaleString("en-IN") %></p>
+
+<span class="badge bg-danger">
+Cancelled
+</span>
+
+</div>
+
+</div>
+
+<% } %>
+
+</div>
+
+<% } %>

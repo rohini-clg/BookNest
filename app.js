@@ -23,6 +23,9 @@ const User = require("./models/users.js");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
+const bookingRouter = require("./routes/booking");
+const profileRouter = require("./routes/profile");
+const wishlistRouter = require("./routes/wishlist");
 
 
 
@@ -39,7 +42,10 @@ main()
 
 async function main() {
   await mongoose.connect(dbUrl);
+  console.log("Connected Database:", mongoose.connection.name);
+  console.log("Connected URI:", dbUrl);
 }
+
 
 
 
@@ -151,14 +157,16 @@ app.get("/demouser", async (req, res) => {
 });
 
 
-
 app.use("/listings", listingRouter);
 
 app.use("/listings/:id/reviews", reviewRouter);
 
+app.use("/listings/:id", bookingRouter);
+app.use("/", bookingRouter);
+
 app.use("/", userRouter);
-
-
+app.use("/", profileRouter);
+app.use("/", wishlistRouter);
 
 
 // app.get("/testListing", async (req, res) => {

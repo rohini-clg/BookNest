@@ -1,0 +1,218 @@
+
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Host Booking Dashboard</h2>
+
+    <% if(listings.length === 0){ %>
+
+        <div class="alert alert-info">
+            You don't own any listings yet.
+        </div>
+
+    <% } %>
+
+    <% for(let listing of listings){ %>
+
+        <div class="card mb-4 shadow">
+
+            <div class="card-header">
+
+                <h4><%= listing.title %></h4>
+
+                <small>
+                    <%= listing.location %>, <%= listing.country %>
+                </small>
+
+            </div>
+
+            <div class="card-body">
+
+                <% if(listing.bookings.length === 0){ %>
+
+                    <p>No bookings yet.</p>
+
+                <% } else { %>
+
+                    <table class="table table-bordered">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Guest</th>
+                                <th>Check In</th>
+                                <th>Check Out</th>
+                                <th>Guests</th>
+                                <th>Total</th>
+                                <th>Status</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <% for(let booking of listing.bookings){ %>
+
+                                <tr>
+
+                                    <td>
+                                        <%= booking.user.username %>
+                                    </td>
+
+                                    <td>
+                                        <%= booking.checkIn.toDateString() %>
+                                    </td>
+
+                                    <td>
+                                        <%= booking.checkOut.toDateString() %>
+                                    </td>
+
+                                    <td>
+                                        <%= booking.guests %>
+                                    </td>
+
+                                    <td>
+                                        ₹ <%= booking.totalPrice.toLocaleString("en-IN") %>
+                                    </td>
+
+                                    <td>
+
+                                      <% layout("/layouts/boilerplate") %>
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Host Booking Dashboard</h2>
+
+    <% if(listings.length === 0){ %>
+
+        <div class="alert alert-info">
+            You don't own any listings yet.
+        </div>
+
+    <% } %>
+
+    <% for(let listing of listings){ %>
+
+        <div class="card mb-4 shadow">
+
+            <div class="card-header">
+
+                <h4><%= listing.title %></h4>
+
+                <small>
+                    <%= listing.location %>, <%= listing.country %>
+                </small>
+
+            </div>
+
+            <div class="card-body">
+
+                <% if(listing.bookings.length === 0){ %>
+
+                    <p>No bookings yet.</p>
+
+                <% } else { %>
+
+                    <table class="table table-bordered">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Guest</th>
+                                <th>Check In</th>
+                                <th>Check Out</th>
+                                <th>Guests</th>
+                                <th>Total</th>
+                                <th>Status</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <% for(let booking of listing.bookings){ %>
+
+                                <tr>
+
+                                    <td>
+                                        <%= booking.user.username %>
+                                    </td>
+
+                                    <td>
+                                        <%= booking.checkIn.toDateString() %>
+                                    </td>
+
+                                    <td>
+                                        <%= booking.checkOut.toDateString() %>
+                                    </td>
+
+                                    <td>
+                                        <%= booking.guests %>
+                                    </td>
+
+                                    <td>
+                                        ₹ <%= booking.totalPrice.toLocaleString("en-IN") %>
+                                    </td>
+
+                                    <td>
+
+                                        <% if(booking.status === "Pending"){ %>
+
+                                            <span class="badge bg-warning text-dark">
+                                                Pending
+                                            </span>
+
+                                        <% } else if(booking.status === "Confirmed"){ %>
+
+                                            <span class="badge bg-success">
+                                                Confirmed
+                                            </span>
+
+                                        <% } else { %>
+
+                                            <span class="badge bg-danger">
+                                                Cancelled
+                                            </span>
+
+                                        <% } %>
+
+                                    </td>
+
+                                </tr>
+
+                            <% } %>
+
+                        </tbody>
+
+                    </table>
+
+                <% } %>
+
+            </div>
+
+        </div>
+
+    <% } %>
+
+</div>
+
+</tr>
+<% } %>
+
+ </tbody>
+
+</table>
+
+<% } %>
+
+</div>
+
+</div>
+
+<% } %>
+</div>

@@ -4,6 +4,7 @@ const axios = require("axios");
 
 module.exports.index = async (req, res) => {
   const allListings = await Listing.find({});
+
   res.render("listings/index.ejs", { allListings });
 };
 
@@ -15,13 +16,19 @@ module.exports.showListing = async (req, res) => {
     let { id } = req.params;
 
     const listing = await Listing.findById(id)
-      .populate({
-        path: "reviews", 
-        populate: {
-          path:"author",
-},
+.populate({
+    path: "reviews",
+    populate: {
+        path: "author",
+    },
 })
-      .populate("owner");
+.populate({
+    path: "bookings",
+    populate: {
+        path: "user",
+    },
+})
+.populate("owner");
 
     if (!listing) {
       req.flash("error", "Listing does not exist");

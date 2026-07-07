@@ -1,0 +1,71 @@
+
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-4">
+
+<h2>My Wishlist ❤️</h2>
+
+<hr>
+
+<% if(wishlist.length === 0){ %>
+
+<div class="alert alert-info">
+Your wishlist is empty.
+</div>
+
+<% } else { %>
+
+<div class="row">
+
+<% for(let listing of wishlist){ %>
+
+<div class="col-md-4 mb-4">
+
+<div class="card h-100 shadow">
+
+<img
+src="<%= listing.image.url %>"
+class="card-img-top"
+style="height:220px; object-fit:cover;"
+>
+
+<div class="card-body">
+
+<h5><%= listing.title %></h5>
+
+<p>
+₹ <%= listing.price.toLocaleString("en-IN") %> / night
+</p>
+
+<a
+href="/listings/<%= listing._id %>"
+class="btn btn-dark"
+>
+View
+</a>
+
+<form
+action="/wishlist/<%= listing._id %>?_method=DELETE"
+method="POST"
+class="mt-2"
+>
+
+<button class="btn btn-danger w-100">
+Remove
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+<% } %>
+
+</div>
+
+<% } %>
+
+</div>

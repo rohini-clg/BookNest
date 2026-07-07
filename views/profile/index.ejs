@@ -1,0 +1,187 @@
+
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-4">
+
+    <h2>My Profile</h2>
+
+    <hr>
+
+    <h4><%= user.username %></h4>
+
+    <p>
+        <strong>Email:</strong>
+        <%= user.email %>
+    </p>
+
+    <hr>
+
+    <div class="row">
+
+        <div class="col-md-4">
+
+            <div class="card text-center">
+
+                <div class="card-body">
+
+                    <h3><%= listings.length %></h3>
+
+                    <p>Listings Posted</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card text-center">
+
+                <div class="card-body">
+
+                    <h3><%= bookings.length %></h3>
+
+                    <p>Bookings Made</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<hr>
+
+<h3 class="mt-4">My Listings</h3>
+
+<% if(listings.length === 0){ %>
+
+<div class="alert alert-info">
+    You haven't posted any listings yet.
+</div>
+
+<% } else { %>
+
+<div class="row">
+
+<% for(let listing of listings){ %>
+
+<div class="col-md-4 mb-3">
+
+<div class="card h-100">
+
+<img
+src="<%= listing.image.url %>"
+class="card-img-top"
+style="height:220px; object-fit:cover;"
+>
+
+<div class="card-body">
+
+<h5><%= listing.title %></h5>
+
+<p>
+₹ <%= listing.price.toLocaleString("en-IN") %> / night
+</p>
+
+<a
+href="/listings/<%= listing._id %>"
+class="btn btn-dark"
+>
+View
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<% } %>
+
+</div>
+
+<% } %>
+
+<hr>
+
+<h3>Recent Bookings</h3>
+
+<% if(bookings.length === 0){ %>
+
+<div class="alert alert-warning">
+No bookings yet.
+</div>
+
+<% } else { %>
+
+<table class="table table-striped">
+
+<thead>
+
+<tr>
+
+<th>Property</th>
+<th>Check In</th>
+<th>Check Out</th>
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<% for(let booking of bookings){ %>
+
+<tr>
+
+<td>
+<%= booking.listing.title %>
+</td>
+
+<td>
+<%= booking.checkIn.toDateString() %>
+</td>
+
+<td>
+<%= booking.checkOut.toDateString() %>
+</td>
+
+<td>
+
+<% if(booking.status==="Pending"){ %>
+
+<span class="badge bg-warning text-dark">
+Pending
+</span>
+
+<% } else if(booking.status==="Confirmed"){ %>
+
+<span class="badge bg-success">
+Confirmed
+</span>
+
+<% } else { %>
+
+<span class="badge bg-danger">
+Cancelled
+</span>
+
+<% } %>
+
+</td>
+
+</tr>
+
+<% } %>
+
+</tbody>
+
+</table>
+
+<% } %>
